@@ -1,5 +1,9 @@
 pipeline{
-    agent any
+     agent {
+        node {
+            label "slave1"
+        }
+    }
     environment {
         PATH = "/opt/apache/bin:$PATH"
     }
