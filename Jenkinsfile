@@ -1,5 +1,5 @@
 def registry = 'https://ntrcreations.jfrog.io'
-def imageName = 'https://ntrcreations.jfrog.io/docker-build-docker/java-akhil'
+def imageName = 'ntrcreations.jfrog.io/docker-build-docker/java-akhil'
 def version   = '5.0.5'
 pipeline{
      agent {
