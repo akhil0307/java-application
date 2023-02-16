@@ -1,3 +1,3 @@
 FROM openjdk:8
-ADD jarstaging/com/stalin/demo-workshop/2.0.2/demo-workshop-2.0.2.jar demo-workshop.jar
-ENTRYPOINT ["java", "-jar", "demo-workshop.jar"]
+ADD jarstaging/com/stalin/java-code/5.0.5/java-code-5.0.5.jar java-code.jar
+ENTRYPOINT ["java", "-jar", "java-code.jar"]

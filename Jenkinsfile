@@ -1,4 +1,6 @@
 def registry = 'https://ntrcreations.jfrog.io'
+def imageName = 'https://ntrcreations.jfrog.io/docker-build-docker/java-akhil'
+def version   = '5.0.5'
 pipeline{
      agent {
         node {
@@ -74,5 +76,26 @@ pipeline{
             }   
         }
     }
-}
+        stage(" Docker Build ") {
+      steps {
+        script {
+           echo '<--------------- Docker Build Started --------------->'
+           app = docker.build(imageName+":"+version)
+           echo '<--------------- Docker Build Ends --------------->'
+        }
+      }
+    }
+
+            stage (" Docker Publish "){
+        steps {
+            script {
+               echo '<--------------- Docker Publish Started --------------->'  
+                docker.withRegistry(registry, 'docker-build-docker'){
+                    app.push()
+                }    
+               echo '<--------------- Docker Publish Ended --------------->'  
+            }
+        }
+    }
+    }
 }
