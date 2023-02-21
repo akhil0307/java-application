@@ -1,22 +1,4 @@
 pipeline{
-    agent {
-        node {
-            label "slave1"
-        }
-    }
-    environment {
-        PATH = "/opt/apache/bin:$PATH"
-    }
-    stages {
-        stage('build') {
-            steps{
-                echo "------------ build started ---------"
-                sh 'mvn clean deploy -Dmaven.test.skip=true'
-                echo "------------ build completed ---------"
-        }
-      }
-
-pipeline{
      agent {
         node {
             label "slave1"
@@ -55,9 +37,7 @@ pipeline{
                     sh "${scannerHome}/bin/sonar-scanner"
                 echo '<--------------- Sonar Analysis stopped  --------------->'
                 }    
-               
             }   
         }
     }
-}
 }
