@@ -27,7 +27,7 @@ pipeline{
                 echo '<------------- Unit Testing stopped  --------------->'
             }
         }
-         stage ("Sonar Analysis") {
+        stage ("Sonar Analysis") {
             environment {
                scannerHome = tool 'sonar-akhil'
             }
@@ -38,6 +38,20 @@ pipeline{
                 echo '<--------------- Sonar Analysis stopped  --------------->'
                 }    
             }   
+        }
+        stage("Quality Gate") {
+            steps {
+                script {
+                  echo '<--------------- Sonar Gate Analysis Started --------------->'
+                    timeout(time: 1, unit: 'HOURS'){
+                       def qg = waitForQualityGate()
+                        if(qg.status !='OK') {
+                            error "Pipeline failed due to quality gate failures: ${qg.status}"
+                        }
+                    }  
+                  echo '<--------------- Sonar Gate Analysis Ends  --------------->'
+                }
+            }
         }
     }
 }
