@@ -54,4 +54,12 @@ pipeline{
             }
         }
     }
+    post {
+      success{ 
+         slackSend channel: 'cicd-pipeline', message: 'Pipeline Built Successfully'
+      }
+      failure {
+         slackSend channel: 'cicd-pipeline', message: 'Pipeline Failed'
+      }
+   }    
 }
